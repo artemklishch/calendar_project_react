@@ -1,8 +1,13 @@
-@import 'common.scss';
 @import 'header.scss';
 @import 'main.scss';
 @import 'popup.scss';
 @import 'redLIne.scss';
+
+
+$commoFontSize: 14px;
+$backgroundColor: #fff;
+$textColorBlack: #000;
+
 * {
     box-sizing: border-box;
 }
