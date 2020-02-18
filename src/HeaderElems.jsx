@@ -62,7 +62,7 @@ class HeaderElems extends PureComponent {
           <div className="header__week-block_line">
            {this.state.arrDaysOfWeek.map(elem => <WeekDays 
               key={elem}
-              elem={elem}
+              dayDate={elem}
             />)
             }
           </div>
