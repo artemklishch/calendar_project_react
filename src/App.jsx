@@ -1,13 +1,7 @@
 import React from 'react';
-import HeaderElems from './HeaderElems';
-import MainElems from './MainElems';
+import AllElems  from './AllElems ';
 
 const App = () => {
-  return (
-    <>
-    <HeaderElems />
-    <MainElems />
-    </>
-  );
+  return <AllElems  />
 };
 export default App;
