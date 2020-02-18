@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import classNames from 'classnames';
 
 const WeekDays = ({ elem }) => {
   const day = moment(elem).format('ddd');
