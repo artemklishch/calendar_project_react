@@ -1,10 +1,12 @@
 import React from 'react';
+import { forHeightTopAndParagraph } from './funcForRenderEvents';
 
-const EventObject = ({objectElem}) => {
+const EventObject = ({ objectElem }) => {
+  const { top, height, padding, timeString } = forHeightTopAndParagraph(objectElem);
   return (
-    <div className='main__sidebar_day_object' style={{height: '150%'}} >
+    <div className='main__sidebar_day_object' style={{ top: top, height: height, padding: padding }} >
       <h4>{objectElem.header}</h4>
-      <p></p>
+      <p>{timeString}</p>
     </div>
   );
 };

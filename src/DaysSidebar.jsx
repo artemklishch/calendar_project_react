@@ -1,9 +1,13 @@
 import React from 'react';
 import { array } from './storage';
 import EventObject from './EventObject';
+import { forChangingEventsArray } from './funcForRenderEvents';
 
+
+const arrayForRender = forChangingEventsArray(array);
+console.log(arrayForRender);
+let jsxObjectOfEvent = false; 
 const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
-  let jsxObjectOfEvent = false;
   return Array(24)
     .fill(null)
     .map((elem, indexElem) => {
@@ -17,7 +21,7 @@ const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
         data-hour-number={index}
       >
         {
-          array.map(objectElem => {
+          arrayForRender.map(objectElem => {
             arrDaysOfWeek.forEach(day => {
               if(objectElem.startDate.getDay() === dayNumber
                 && objectElem.startDate.getDate() === day.getDate()
