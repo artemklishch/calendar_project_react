@@ -19,9 +19,8 @@ class AllElems extends PureComponent {
   onArrowBtns = event => this.setState({
     firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek)
   });
-  onClickOnFieldOfDays = () => {
-    return <ModalWindow />;
-  };
+  // onCreateButton = () => <ModalWindow />;
+
 
   render() {
     const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
@@ -33,8 +32,10 @@ class AllElems extends PureComponent {
           dateTitle={dateTitle}
           onArrowBtns={this.onArrowBtns}
           onClickTodayWeek={this.onTodayButton}
+          onCreateButton={this.onCreateButton}
         />
         <MainElems arrDaysOfWeek={arrDaysOfWeek} />
+        {/* <ModalWindow /> */}
       </>
     )
   }
