@@ -3,10 +3,9 @@ import { array } from './storage';
 import EventObject from './EventObject';
 import { forChangingEventsArray } from './funcForRenderEvents';
 
-
 const arrayForRender = forChangingEventsArray(array);
-
 let jsxObjectOfEvent = false; 
+
 const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
   return Array(24)
     .fill(null)
