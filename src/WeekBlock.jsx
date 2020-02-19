@@ -2,6 +2,7 @@ import React from 'react';
 import WeekDays from './WeekDays';
 
 const WeekBlock = ({arrDaysOfWeek}) => {
+  
   return (
     <div className="header__week-block">
       <div className="header__week-block_gmt-cell">

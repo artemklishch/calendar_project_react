@@ -2,7 +2,7 @@ import React from 'react';
 import TimeSidebar from './TimeSidebar';
 import DaysSidebar from './DaysSidebar';
 
-const MainElems = () => {
+const MainElems = ({arrDaysOfWeek}) => {
   const arrayOfDays = Array(7).fill(null);
   let dayNumber = 0;
   return (
@@ -14,7 +14,10 @@ const MainElems = () => {
         {
           arrayOfDays.map((element, index) =>
             <div key={dayNumber++} className="main__sidebar_days_line" data-day-number={index}>
-              <DaysSidebar />
+              <DaysSidebar 
+                arrDaysOfWeek={arrDaysOfWeek}
+                dayNumber={index}
+              />
             </div>)
         }
       </div>

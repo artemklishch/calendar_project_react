@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavigationElems = ({ onClickAnotherWeek, onClickTodayWeek, dateTitle }) => {
+const NavigationElems = ({ onArrowBtns, dateTitle, onClickTodayWeek }) => {
   return (
     <nav className="nav">
       <button className="nav__button">
@@ -8,7 +8,7 @@ const NavigationElems = ({ onClickAnotherWeek, onClickTodayWeek, dateTitle }) =>
         Create
         </button>
       <button className="nav_day" onClick={onClickTodayWeek}>Today</button>
-      <div className="nav__arow" onClick={onClickAnotherWeek}>
+      <div className="nav__arow" onClick={onArrowBtns}>
         <div className="nav__arow_left"></div>
         <div className="nav__arow_right"></div>
       </div>

@@ -2,11 +2,11 @@ import React from 'react';
 import NavigationElems from './NavigationElems';
 import WeekBlock from './WeekBlock';
 
-const HeaderElems = ({arrDaysOfWeek, dateTitle, onClickTodayWeek, onClickAnotherWeek}) => {
+const HeaderElems = ({arrDaysOfWeek, dateTitle, onArrowBtns, onClickTodayWeek}) => {
     return (
       <header className="header">
         <NavigationElems
-          onClickAnotherWeek={onClickAnotherWeek}
+          onArrowBtns={onArrowBtns}
           onClickTodayWeek={onClickTodayWeek}
           dateTitle={dateTitle}
         />
