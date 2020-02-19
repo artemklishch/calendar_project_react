@@ -20,7 +20,7 @@ const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
         data-hour-number={index}
       >
         {
-          arrayForRender.map(objectElem => {
+          arrayForRender.map(objectElem => { 
             arrDaysOfWeek.forEach(day => {
               if(objectElem.startDate.getDay() === dayNumber
                 && objectElem.startDate.getDate() === day.getDate()
