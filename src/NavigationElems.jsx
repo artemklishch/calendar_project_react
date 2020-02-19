@@ -1,9 +1,9 @@
 import React from 'react';
 
-const NavigationElems = ({ onArrowBtns, dateTitle, onClickTodayWeek, onCreateButton }) => {
+const NavigationElems = ({ onArrowBtns, dateTitle, onClickTodayWeek, onShowForm }) => {
   return (
     <nav className="nav">
-      <button className="nav__button" onClick={onCreateButton}>
+      <button className="nav__button" onClick={onShowForm}>
         <img src="https://img.icons8.com/color/48/000000/plus-math.png" className="plus" alt="Plus img" />
         Create
         </button>

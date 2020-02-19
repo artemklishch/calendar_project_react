@@ -13,14 +13,15 @@ import ModalWindow from './ModalWindow';
 class AllElems extends PureComponent {
   state = {
     firstDayOfWeek: firstDayForCurrentOfWeek(),
+    isOpen: false
   };
 
   onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
   onArrowBtns = event => this.setState({
     firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek)
   });
-  // onCreateButton = () => <ModalWindow />;
-
+  hideForm = () => this.setState({isOpen: false});
+  showFormOnCreateButton = () => this.setState({isOpen: true});
 
   render() {
     const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
@@ -32,10 +33,13 @@ class AllElems extends PureComponent {
           dateTitle={dateTitle}
           onArrowBtns={this.onArrowBtns}
           onClickTodayWeek={this.onTodayButton}
-          onCreateButton={this.onCreateButton}
+          onShowForm={this.showFormOnCreateButton}
         />
         <MainElems arrDaysOfWeek={arrDaysOfWeek} />
-        {/* <ModalWindow /> */}
+        <ModalWindow 
+          isOpen={this.state.isOpen}
+          onHideForm={this.hideForm}
+         />
       </>
     )
   }

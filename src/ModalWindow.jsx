@@ -1,10 +1,11 @@
 import React from 'react';
 
-const ModalWindow = () => {
+const ModalWindow = ({isOpen, onHideForm}) => {
+  if(!isOpen) return null;
   return (
     <div className="popup-layer">
       <form className="popup event" data-id-event="">
-        <span className="popup__btn-close"><img className="close" src="https://img.icons8.com/color/48/000000/close-window.png" alt="close" /></span>
+        <span className="popup__btn-close" onClick={onHideForm}><img className="close" src="https://img.icons8.com/color/48/000000/close-window.png" alt="close" /></span>
         <input className="event__name" name="header" type="text" placeholder="Add title " />
         <div className="popup__picker">
           <img className="clock" src="https://img.icons8.com/pastel-glyph/64/000000/time.png" alt="clock" />
