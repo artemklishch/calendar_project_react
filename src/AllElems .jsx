@@ -3,47 +3,38 @@ import MainElems from './MainElems';
 import HeaderElems from './HeaderElems';
 import {
   onRenderTitleDate,
-  onGenerateCurrentWeek,
-  onGenerateAnotherWeek
+  firstDayForCurrentOfWeek,
+  onGenerateAnotherfirstDayOfWeek,
+  generateArrayOfCurrentWeek,
 } from './funcsForRenderCommonElems';
+import ModalWindow from './ModalWindow';
+
 
 class AllElems extends PureComponent {
   state = {
-    arrDaysOfWeek: [],
-    dateTitle: ''
+    firstDayOfWeek: firstDayForCurrentOfWeek(),
   };
 
-  componentDidMount() {
-    this.generateCurrentWeek();
-    this.renderTitleDate();
-  }
-  componentDidUpdate() {
-    this.renderTitleDate();
-  }
-
-  generateCurrentWeek = () => this.setState({
-    arrDaysOfWeek: onGenerateCurrentWeek(),
-    dateTitle: ''
+  onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
+  onArrowBtns = event => this.setState({
+    firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek)
   });
-  generateAnotherWeek = event => this.setState({
-    arrDaysOfWeek: onGenerateAnotherWeek(event, this.state.arrDaysOfWeek)
-  });
-  renderTitleDate = () => this.setState({
-    dateTitle: onRenderTitleDate(this.state.arrDaysOfWeek[0], this.state.arrDaysOfWeek[6])
-  });
-
-  
+  onClickOnFieldOfDays = () => {
+    return <ModalWindow />;
+  };
 
   render() {
+    const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
+    const dateTitle = onRenderTitleDate(arrDaysOfWeek);
     return (
       <>
         <HeaderElems
-          arrDaysOfWeek={this.state.arrDaysOfWeek}
-          dateTitle={this.state.dateTitle}
-          onClickAnotherWeek={this.generateAnotherWeek}
-          onClickTodayWeek={this.generateCurrentWeek}
+          arrDaysOfWeek={arrDaysOfWeek}
+          dateTitle={dateTitle}
+          onArrowBtns={this.onArrowBtns}
+          onClickTodayWeek={this.onTodayButton}
         />
-        <MainElems />
+        <MainElems arrDaysOfWeek={arrDaysOfWeek} />
       </>
     )
   }
