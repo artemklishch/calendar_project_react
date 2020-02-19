@@ -8,6 +8,7 @@ import {
   generateArrayOfCurrentWeek,
 } from './funcsForRenderCommonElems';
 import ModalWindow from './ModalWindow';
+import { forObjCreateBtn } from './forObjOnCreateBtn';
 
 
 class AllElems extends PureComponent {
@@ -21,9 +22,12 @@ class AllElems extends PureComponent {
     firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek)
   });
   hideForm = () => this.setState({isOpen: false});
-  showFormOnCreateButton = () => this.setState({isOpen: true});
+  showFormOnCreateButton = () => {
+    this.setState({isOpen: true});
+    this.tempObj = forObjCreateBtn();
+  }
 
-  render() {
+  render() { 
     const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
     const dateTitle = onRenderTitleDate(arrDaysOfWeek);
     return (
@@ -39,6 +43,7 @@ class AllElems extends PureComponent {
         <ModalWindow 
           isOpen={this.state.isOpen}
           onHideForm={this.hideForm}
+          tempObj={this.tempObj}
          />
       </>
     )

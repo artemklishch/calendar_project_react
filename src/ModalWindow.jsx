@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ModalWindow = ({isOpen, onHideForm}) => {
+const ModalWindow = ({isOpen, onHideForm, tempObj}) => {
   if(!isOpen) return null;
   return (
     <div className="popup-layer">
@@ -9,11 +9,11 @@ const ModalWindow = ({isOpen, onHideForm}) => {
         <input className="event__name" name="header" type="text" placeholder="Add title " />
         <div className="popup__picker">
           <img className="clock" src="https://img.icons8.com/pastel-glyph/64/000000/time.png" alt="clock" />
-          <input className="event__date-start specialDate input" name="startTime" required type="date" />
-          <input type="time" className="startTime_place time-place input" name="startTimePlace" />
+          <input className="event__date-start specialDate input" name="startTime" required type="date" defaultValue={tempObj.date} />
+          <input type="time" className="startTime_place time-place input" name="startTimePlace" defaultValue={tempObj.startTime} />
           <span className='line'></span>
-          <input type="time" className="endTime_place time-place input" name="endTimePlace" />
-          <input className="event__date-end specialDate input" name="endTime" required type="date" />
+          <input type="time" className="endTime_place time-place input" name="endTimePlace" defaultValue={tempObj.endTime} />
+          <input className="event__date-end specialDate input" name="endTime" required type="date" defaultValue={tempObj.date} />
         </div>
         <div className="centerData">
           <img className="multiline" src="https://img.icons8.com/windows/32/000000/multiline-text.png" alt="mutiline" />
