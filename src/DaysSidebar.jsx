@@ -5,7 +5,7 @@ import { forChangingEventsArray } from './funcForRenderEvents';
 
 
 const arrayForRender = forChangingEventsArray(array);
-console.log(arrayForRender);
+
 let jsxObjectOfEvent = false; 
 const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
   return Array(24)
