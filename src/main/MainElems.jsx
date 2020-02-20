@@ -1,6 +1,7 @@
 import React from 'react';
 import TimeSidebar from './TimeSidebar';
 import DaysSidebar from './DaysSidebar';
+import './main.scss';
 
 const MainElems = ({arrDaysOfWeek}) => {
   const arrayOfDays = Array(7).fill(null);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { forHeightTopAndParagraph } from './funcForRenderEvents';
+import { forHeightTopAndParagraph } from '../funcs/funcForRenderEvents';
 
 const EventObject = ({ objectElem }) => {
   const { top, height, padding, timeString } = forHeightTopAndParagraph(objectElem);

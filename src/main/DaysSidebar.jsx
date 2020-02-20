@@ -1,7 +1,7 @@
 import React from 'react';
-import { array } from './storage';
+import { array } from '../storage';
 import EventObject from './EventObject';
-import { forChangingEventsArray } from './funcForRenderEvents';
+import { forChangingEventsArray } from '../funcs/funcForRenderEvents';
 
 const arrayForRender = forChangingEventsArray(array);
 let jsxObjectOfEvent = false; 

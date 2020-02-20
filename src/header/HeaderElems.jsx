@@ -1,6 +1,7 @@
 import React from 'react';
 import NavigationElems from './NavigationElems';
 import WeekBlock from './WeekBlock';
+import './header.scss';
 
 const HeaderElems = ({
   arrDaysOfWeek,

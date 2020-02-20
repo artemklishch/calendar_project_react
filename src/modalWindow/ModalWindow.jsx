@@ -1,4 +1,5 @@
 import React from 'react';
+import './popup.scss';
 
 const ModalWindow = ({isOpen, onHideForm, tempObj}) => {
   if(!isOpen) return null;
