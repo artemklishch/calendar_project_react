@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from './node_modules/react';
 import WeekDays from './WeekDays';
 import NavigationElems from './NavigationElems';
-import moment from 'moment';
-
+import moment from './node_modules/moment';
+import './header.scss';
 
 class HeaderElems extends PureComponent {
   state = {
