@@ -50,9 +50,6 @@ $colorForHoverInputs: #e3e8ed;
   &__description {
       border: none;
   }
-  &__btn-delete{
-      display: none;
-  }
   &__date-start,
   &__date-end {
       padding: 2px;
@@ -117,12 +114,16 @@ $colorForHoverInputs: #e3e8ed;
 }
 
 .event__btn-delete {
+  display: none;
   cursor: pointer;
   display: none;
   position: absolute;
   left: 10px;
   bottom: 10px;
 } 
+.btn-delete_block{
+  display: block;
+}
 
 
 .btn_save{

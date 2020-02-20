@@ -1,0 +1,27 @@
+export const onFormObject = event => {
+  event.preventDefault();
+  const form = document.querySelector('.popup');
+  let tempObj = [...new FormData(form)]
+      .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});
+  tempObj.startDate = tempObj.startDate.split('-');
+  tempObj.startDate[1] = tempObj.startDate[1] - 1;
+  tempObj.startTimePlace = tempObj.startTimePlace.split(':');
+  tempObj.startDate = tempObj.startDate.concat(tempObj.startTimePlace);
+  tempObj.startDate = new Date(...tempObj.startDate);
+
+  tempObj.endDate = tempObj.endDate.split('-');
+  tempObj.endDate[1] = tempObj.endDate[1] - 1;
+  tempObj.endTimePlace = tempObj.endTimePlace.split(':');
+  tempObj.endDate = tempObj.endDate.concat(tempObj.endTimePlace);
+  tempObj.endDate = new Date(...tempObj.endDate);
+
+  tempObj.id = Math.random().toFixed(10);
+  
+  tempObj.header = tempObj.header === '' ? 'No header' : tempObj.header;
+  tempObj.description = tempObj.description === '' ? '' : tempObj.description;
+
+  delete tempObj.startTimePlace;
+  delete tempObj.endTimePlace;
+
+  return tempObj;
+};

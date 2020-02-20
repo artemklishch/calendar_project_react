@@ -7,9 +7,7 @@ const WeekDays = ({ dayDate }) => {
   const date = moment(dayDate).format("D");
   const dateClass = classNames('header__week-block_days', 
     {'today__header__week-block_days': 
-      dayDate.getDate() === new Date().getDate()
-      && dayDate.getMonth() === new Date().getMonth()
-      && dayDate.getFullYear() === new Date().getFullYear()
+      moment(dayDate).format('ll') === moment(new Date()).format('ll')
     });
   return (
     <div className={dateClass}>

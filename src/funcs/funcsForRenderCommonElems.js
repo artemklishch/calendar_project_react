@@ -19,9 +19,6 @@ export const generateArrayOfCurrentWeek = firstDayOfWeek => {
 };
 
 export const onGenerateAnotherfirstDayOfWeek = (event, firstDayOfWeek)  => {
-  const checkArrow = event.target.classList.contains('nav__arow_left') ||
-    event.target.classList.contains('nav__arow_right');
-  if (!checkArrow) return;
   const updatedFirstDayOfWeek = new Date(firstDayOfWeek);
   event.target.classList.contains('nav__arow_right')
     ? updatedFirstDayOfWeek.setDate(updatedFirstDayOfWeek.getDate() + 7)
