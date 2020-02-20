@@ -1,12 +1,9 @@
 import React from 'react';
-import { array } from '../storage';
 import EventObject from './EventObject';
-import { forChangingEventsArray } from '../funcs/funcForRenderEvents';
 
-const arrayForRender = forChangingEventsArray(array);
-let jsxObjectOfEvent = false; 
 
-const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
+const DaysSidebar = ({arrDaysOfWeek, dayNumber, arrayForRender, onShowFormOnEditing}) => {
+  let placeForEventObject = false; 
   return Array(24)
     .fill(null)
     .map((elem, indexElem) => {
@@ -27,12 +24,16 @@ const DaysSidebar = ({arrDaysOfWeek, dayNumber}) => {
                 && objectElem.startDate.getMonth() === day.getMonth()
                 && objectElem.startDate.getFullYear() === day.getFullYear()
                 && objectElem.startDate.getHours() === index){
-                  jsxObjectOfEvent = true;
+                  placeForEventObject = true;
               }
             });
-            if(jsxObjectOfEvent){
-              jsxObjectOfEvent = false;
-              return <EventObject key={objectElem.id} objectElem={objectElem} />;
+            if(placeForEventObject){
+              placeForEventObject = false;
+              return <EventObject 
+                key={objectElem.id} 
+                objectElem={objectElem}
+                onShowFormOnEditing={onShowFormOnEditing} 
+              />;
             }
             return null;  
           })
