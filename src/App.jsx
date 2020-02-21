@@ -12,10 +12,10 @@ import { forObjCreateBtn } from './funcs/forObjOnCreateBtn';
 import { forObjectOnClickOnField } from './funcs/forObjectOnClickOnField';
 import { array } from './storage';
 import { forChangingEventsArray } from './funcs/funcForRenderEvents';
-import { onFormObject } from './funcs/onFormObject';
+import { onChangeArrayOfEvents, onChangeArrayOfEventsInDelete } from './funcs/onChangeArrayOfEvents';
 import { forObjectOnClickOnEvent } from './funcs/forObjectOnClickOnEvent';
 import { getPosOfRedLine } from './funcs/onPositionOfRedLine';
-
+import { onInputValidate, onClickValidate, onCheckLateEffortOfDeleteOrEdite } from './funcs/validate';
 
 
 class App extends PureComponent {
@@ -25,65 +25,50 @@ class App extends PureComponent {
     arrayOfEvents: array,
     isEditing: false,
     positionOfRedLine: getPosOfRedLine(),
+    validateText: '',
   };
-  componentDidMount(){
+  componentDidMount() {
     this.interval = setInterval(() => {
       this.setState({
         positionOfRedLine: getPosOfRedLine(),
       });
     }, 1000);
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
-  onArrowBtns = event => this.setState({
-    firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek)
-  });
+  onArrowBtns = event => this.setState({ firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek) });
   hideForm = () => this.setState({ isOpen: false, isEditing: false });
   showFormOnCreateButton = () => {
-    this.setState({ isOpen: true });
     this.tempObj = forObjCreateBtn();
+    this.setState({ isOpen: true, validateText: onClickValidate({ ...this.tempObj }, this.state.arrayOfEvents) });
   }
   showFormOnClickOnField = event => {
     if (!event.target.classList.contains('main__sidebar_days_hours')) return;
-    this.setState({ isOpen: true });
-    const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
-    this.tempObj = forObjectOnClickOnField(event, arrDaysOfWeek);
+    this.tempObj = forObjectOnClickOnField(event, generateArrayOfCurrentWeek(this.state.firstDayOfWeek));
+    this.setState({ isOpen: true, validateText: onClickValidate({ ...this.tempObj }, this.state.arrayOfEvents) });
   }
   showFormOnEditing = event => {
-    if (!event.target.classList.contains('main__sidebar_day_object')) return;
+    if (!event.target.classList.contains('eventObj')) return;
     this.tempObj = forObjectOnClickOnEvent(event, this.state.arrayOfEvents);
-    this.setState({
-      isOpen: true,
-      isEditing: this.tempObj.id
-    });
+    this.setState({ isOpen: true, isEditing: this.tempObj.id });
+    this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
   };
   onFormSubmit = event => {
     event.preventDefault();
-    const [...arr] = this.state.arrayOfEvents;
-    const tempObj = onFormObject(event);
-    let indexElement;
-    if (this.state.isEditing !== false) {
-      arr.forEach((elem, index) => {
-        if (elem.id === this.state.isEditing) indexElement = index;
-      });
-      arr.splice(indexElement, 1, tempObj);
-    } else arr.push(tempObj);
-    this.setState({ arrayOfEvents: arr });
+    if (this.state.validateText !== '') return;
+    this.setState({ arrayOfEvents: onChangeArrayOfEvents(this.state.arrayOfEvents, event, this.state.isEditing) });
     this.hideForm();
   }
   onDeleteEvent = () => {
-    const [...arr] = this.state.arrayOfEvents;
-    let indexElement;
-    arr.forEach((elem, index) => {
-      if (elem.id === this.state.isEditing) indexElement = index;
-    });
-    arr.splice(indexElement, 1);
-    this.setState({ arrayOfEvents: arr });
+    if (this.state.validateText === 'You can`t change or delete event after 15 minutes to event') return;
+    this.setState({ arrayOfEvents: onChangeArrayOfEventsInDelete(this.state.arrayOfEvents, this.state.isEditing) });
     this.hideForm();
   };
+  onValidate = event =>
+    this.setState({ validateText: onInputValidate(event, this.state.isEditing, this.state.arrayOfEvents) });
 
   render() {
     const arrayForRender = forChangingEventsArray(this.state.arrayOfEvents);
@@ -112,6 +97,8 @@ class App extends PureComponent {
           onCreateEvent={this.onFormSubmit}
           isEditing={this.state.isEditing}
           onDeleteEvent={this.onDeleteEvent}
+          onValidate={this.onValidate}
+          validateText={this.state.validateText}
         />
       </>
     )
