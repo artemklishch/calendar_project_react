@@ -1,6 +1,5 @@
 
 let validateMessageElem = document.querySelector('.message_validation');
-// const deleteBasket = document.querySelector('.event__btn-delete');
 export let markOnValidateText = 0;
 
 export const onMakeMarkOnValidateTextNull = () => {
@@ -13,16 +12,16 @@ export const onClearValidateMessages = () => validateMessageElem.innerHTML = '';
 const onCheckIntersectionEvents = (object, events) => {
     let errorText = undefined;
     const eventsArray = events.map(elem => {
-        elem.startTime = new Date(elem.startTime);
-        elem.endTime = new Date(elem.endTime);
+        elem.startDate = new Date(elem.startDate);
+        elem.endDate = new Date(elem.endDate);
         return elem;
     });
-    let currentStartTime = object.startTime.getTime();
-    let currentEndTime = object.endTime.getTime();
+    let currentStartTime = object.startDate.getTime();
+    let currentEndTime = object.endDate.getTime();
     for(let i = 0; i < eventsArray.length; i++) {
         if(eventsArray[i].id === object.id) continue;
-        let elemStartTime = eventsArray[i].startTime.getTime();
-        let elemEndTime = eventsArray[i].endTime.getTime();
+        let elemStartTime = eventsArray[i].startDate.getTime();
+        let elemEndTime = eventsArray[i].endDate.getTime();
         if((currentStartTime < elemEndTime 
             && currentStartTime < elemEndTime) 
         && 
@@ -37,21 +36,21 @@ const onCheckIntersectionEvents = (object, events) => {
 
 
 const onCheckCorrectDates = (object) =>
-    object.endTime < object.startTime
+    object.endDate < object.startDate
         ? 'Error! End date can`t be ealier than start date'
         : undefined;
 
 
 const onCheckEventLength = (object) =>
-    21600000 <= object.endTime - object.startTime
+    21600000 <= object.endDate - object.startDate
     ? 'Error! Event can`t be more than 6 hours'
     : undefined;
 
 
 const onCheckMinutes = (object) => 
-    (object.startTime.getMinutes() !== 0 && object.startTime.getMinutes() % 15 !== 0) 
+    (object.startDate.getMinutes() !== 0 && object.startDate.getMinutes() % 15 !== 0) 
     ||
-    (object.endTime.getMinutes() !== 0 && object.endTime.getMinutes() % 15 !== 0)
+    (object.endDate.getMinutes() !== 0 && object.endDate.getMinutes() % 15 !== 0)
         ? 'Error! Minuts must be a multiple of fifteen'
         : undefined;
 
@@ -63,17 +62,17 @@ export const onMakeObjectFromValuesInForm = isEditing => {
     
     const startDate_hours = tempObj.startTimePlace.split(':')[0];
     const startDate_min = tempObj.startTimePlace.split(':')[1];
-    tempObj.startTime = [...tempObj.startTime.split('-')];
-    tempObj.startTime[1] = tempObj.startTime[1] - 1;
-    tempObj.startTime.push(startDate_hours, startDate_min);
-    tempObj.startTime = new Date(...tempObj.startTime);
+    tempObj.startDate = [...tempObj.startDate.split('-')];
+    tempObj.startDate[1] = tempObj.startDate[1] - 1;
+    tempObj.startDate.push(startDate_hours, startDate_min);
+    tempObj.startDate = new Date(...tempObj.startDate);
     
     const endDate_hours = tempObj.endTimePlace.split(':')[0];
     const endDate_min = tempObj.endTimePlace.split(':')[1];
-    tempObj.endTime = [...tempObj.endTime.split('-')];
-    tempObj.endTime[1] = tempObj.endTime[1] - 1;
-    tempObj.endTime.push(endDate_hours, endDate_min);
-    tempObj.endTime = new Date(...tempObj.endTime);
+    tempObj.endDate = [...tempObj.endDate.split('-')];
+    tempObj.endDate[1] = tempObj.endDate[1] - 1;
+    tempObj.endDate.push(endDate_hours, endDate_min);
+    tempObj.endDate = new Date(...tempObj.endDate);
 
     tempObj.id = isEditing || '';    
 
@@ -81,7 +80,6 @@ export const onMakeObjectFromValuesInForm = isEditing => {
 };
 
 
-const form = document.querySelector('.popup');
 const arrOfValidateFuncs = [onCheckMinutes, onCheckEventLength, 
     onCheckCorrectDates, onCheckIntersectionEvents];
 export const onInputValidate = (event, isEditing, arrayOfEvents) => {
@@ -91,42 +89,54 @@ export const onInputValidate = (event, isEditing, arrayOfEvents) => {
         .map(func => func(tempObj, arrayOfEvents))
         .filter(erroText => erroText)
         .join(' ');
-    validateMessageElem.textContent = errorText;
-    if(validateMessageElem.textContent !== ''){
-        markOnValidateText = 1;
-    }else{
-        markOnValidateText = 0;
-    } 
+    const validateMessageElem = errorText;
+    return validateMessageElem;
 };
-form.addEventListener('input', onInputValidate);
 
 
 
 
 
-// export const onCheckLateEffortOfDeleteOrEdite = (object) => {
-//     const timeToEvent = (object.startTime.valueOf() - Date.now())/1000/60;
-//     if(timeToEvent <= 15 && timeToEvent > 0){
-//         validateMessageElem.innerHTML = 'You can`t change or delete event after 15 minutes to event';
-//         markOnValidateText = 1;
-//         deleteBasket.removeEventListener('click', funcForDeleteEvene);
-//     }else{
-//         validateMessageElem.innerHTML = '';
-//         markOnValidateText = 0;
-//         deleteBasket.addEventListener('click', funcForDeleteEvene);
-//     };
-// };
+
+export const onCheckLateEffortOfDeleteOrEdite = (object) => {
+    object.startDate = object.startDate.split('-');
+    object.startTime = object.startTime.split(':');
+    object.startDate = new Date(...object.startDate.concat(object.startTime));
+    object.startDate.setMonth(object.startDate.getMonth() - 1);
+
+    object.endDate = object.endDate.split('-');
+    object.endTime = object.endTime.split(':');
+    object.endDate = new Date(...object.endDate.concat(object.endTime));
+    object.endDate.setMonth(object.endDate.getMonth() - 1);
+
+    const timeToEvent = (object.startDate.valueOf() - Date.now())/1000/60;
+    
+    // return 
+    let validateMessageElem;
+    if(timeToEvent <= 15 && timeToEvent > 0){
+        validateMessageElem = 'You can`t change or delete event after 15 minutes to event';
+    }else{
+        validateMessageElem = '';
+    };
+    return validateMessageElem;
+};
 
 
-// export const onClickValidate = object => {
-//     const errorText = arrOfValidateFuncs
-//         .map(func => func(object))
-//         .filter(erroText => erroText)
-//         .join(' ');
-//     validateMessageElem.textContent = errorText;
-//     if(validateMessageElem.textContent !== ''){
-//         markOnValidateText = 1;
-//     }else{
-//         markOnValidateText = 0;
-//     } 
-// };
+export const onClickValidate = (object, arrayOfEvents) => {
+    object.startDate = object.startDate.split('-');
+    object.startTime = object.startTime.split(':');
+    object.startDate = new Date(...object.startDate.concat(object.startTime));
+    object.startDate.setMonth(object.startDate.getMonth() - 1);
+
+    object.endDate = object.endDate.split('-');
+    object.endTime = object.endTime.split(':');
+    object.endDate = new Date(...object.endDate.concat(object.endTime));
+    object.endDate.setMonth(object.endDate.getMonth() - 1);
+
+    const errorText = arrOfValidateFuncs
+        .map(func => func(object, arrayOfEvents))
+        .filter(erroText => erroText)
+        .join(' ');
+    const validateMessageElem = errorText;
+    return validateMessageElem;
+};

@@ -5,7 +5,7 @@ const EventObject = ({ objectElem, onShowFormOnEditing }) => {
   const { top, height, padding, timeString } = forHeightTopAndParagraph(objectElem);
   return (
     <div 
-      className='main__sidebar_day_object'
+      className='main__sidebar_day_object eventObj'
       style={{ 
         top: top,
         height: height,
@@ -14,8 +14,8 @@ const EventObject = ({ objectElem, onShowFormOnEditing }) => {
       data-event-id={objectElem.id}
       onClick={onShowFormOnEditing}
     >
-      <h4 className="main__sidebar_day_object_header">{objectElem.header}</h4>
-      <p className="main__sidebar_day_object_time">{timeString}</p>
+      <h4 className="eventObj" data-event-id={objectElem.id}>{objectElem.header}</h4>
+      <p className="eventObj" data-event-id={objectElem.id}>{timeString}</p>
     </div>
   );
 };
