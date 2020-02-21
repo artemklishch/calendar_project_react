@@ -4,7 +4,12 @@ import DaysSidebar from './DaysSidebar';
 import './main.scss';
 import RedLine from '../redLine/RedLine';
 
-const MainElems = ({arrDaysOfWeek, onShowForm, arrayForRender, onShowFormOnEditing}) => {
+const MainElems = ({
+  arrDaysOfWeek,
+  onShowForm,
+  arrayForRender,
+  onShowFormOnEditing,
+  positionOfRedLine, }) => {
   const arrayOfDays = Array(7).fill(null);
   let dayNumber = 0;
   return (
@@ -22,6 +27,7 @@ const MainElems = ({arrDaysOfWeek, onShowForm, arrayForRender, onShowFormOnEditi
                 dayNumber={index}
                 arrayForRender={arrayForRender}
                 onShowFormOnEditing={onShowFormOnEditing}
+                positionOfRedLine={positionOfRedLine}
               />
               {/* {currentDate.getDay() === index && <RedLine />}           */}
             </div>

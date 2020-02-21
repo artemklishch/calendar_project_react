@@ -14,6 +14,8 @@ import { array } from './storage';
 import { forChangingEventsArray } from './funcs/funcForRenderEvents';
 import { onFormObject } from './funcs/onFormObject';
 import { forObjectOnClickOnEvent } from './funcs/forObjectOnClickOnEvent';
+import { getPosOfRedLine } from './funcs/onPositionOfRedLine';
+
 
 
 class App extends PureComponent {
@@ -21,8 +23,19 @@ class App extends PureComponent {
     firstDayOfWeek: firstDayForCurrentOfWeek(),
     isOpen: false,
     arrayOfEvents: array,
-    isEditing: false
+    isEditing: false,
+    positionOfRedLine: getPosOfRedLine(),
   };
+  componentDidMount(){
+    this.interval = setInterval(() => {
+      this.setState({
+        positionOfRedLine: getPosOfRedLine(),
+      });
+    }, 1000);
+  }
+  componentWillUnmount(){
+    clearInterval(this.interval);
+  }
 
   onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
   onArrowBtns = event => this.setState({
@@ -90,6 +103,7 @@ class App extends PureComponent {
           onShowForm={this.showFormOnClickOnField}
           arrayForRender={arrayForRender}
           onShowFormOnEditing={this.showFormOnEditing}
+          positionOfRedLine={this.state.positionOfRedLine}
         />
         <ModalWindow
           isOpen={this.state.isOpen}

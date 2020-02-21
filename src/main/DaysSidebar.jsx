@@ -8,7 +8,8 @@ const DaysSidebar = ({
   arrDaysOfWeek,
   dayNumber,
   arrayForRender,
-  onShowFormOnEditing }) => {
+  onShowFormOnEditing,
+  positionOfRedLine }) => {
   let placeForEventObject = false;
   return Array(24)
     .fill(null)
@@ -48,7 +49,7 @@ const DaysSidebar = ({
           currentDate.getDay() === dayNumber
             && currentDate.getHours() === index
             && currentDay
-            && <RedLine key={Math.random()} />
+            && <RedLine key={Math.random()} positionOfRedLine={positionOfRedLine} />
         }
       </div>
     });
