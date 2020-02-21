@@ -1,6 +1,7 @@
 import React from 'react';
 import './popup.scss';
 import classNames from 'classnames';
+import { onInputValidate } from './funcs/validate';
 
 const ModalWindow = ({ 
   isOpen,
@@ -20,11 +21,11 @@ const ModalWindow = ({
         <input className="event__name" name="header" type="text" placeholder="Add title " defaultValue={tempObj.header} />
         <div className="popup__picker">
           <img className="clock" src="https://img.icons8.com/pastel-glyph/64/000000/time.png" alt="clock" />
-          <input className="event__date-start" name="startDate" required type="date" defaultValue={tempObj.startDate} />
-          <input type="time" className="startTime_place" name="startTimePlace" defaultValue={tempObj.startTime} />
+          <input className="event__date-start input" name="startDate" required type="date" defaultValue={tempObj.startDate} />
+          <input type="time" className="startTime_place input" name="startTimePlace" defaultValue={tempObj.startTime} />
           <span className='line'></span>
-          <input type="time" className="endTime_place" name="endTimePlace" defaultValue={tempObj.endTime} />
-          <input className="event__date-end" name="endDate" required type="date" defaultValue={tempObj.endDate} />
+          <input type="time" className="endTime_place input" name="endTimePlace" defaultValue={tempObj.endTime} />
+          <input className="event__date-end input" name="endDate" required type="date" defaultValue={tempObj.endDate} />
         </div>
         <div className="centerData">
           <img className="multiline" src="https://img.icons8.com/windows/32/000000/multiline-text.png" alt="mutiline" />

@@ -17,7 +17,6 @@ import { forObjectOnClickOnEvent } from './funcs/forObjectOnClickOnEvent';
 import { getPosOfRedLine } from './funcs/onPositionOfRedLine';
 
 
-
 class App extends PureComponent {
   state = {
     firstDayOfWeek: firstDayForCurrentOfWeek(),
@@ -59,6 +58,7 @@ class App extends PureComponent {
       isOpen: true,
       isEditing: this.tempObj.id
     });
+    console.log(this.tempObj);
   };
   onFormSubmit = event => {
     event.preventDefault();
