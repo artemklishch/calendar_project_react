@@ -1,55 +1,56 @@
 import React from 'react';
 import EventObject from './EventObject';
 import RedLine from '../redLine/RedLine';
+import moment from 'moment';
 
 
 const DaysSidebar = ({
   arrDaysOfWeek,
   dayNumber,
   arrayForRender,
-  onShowFormOnEditing}) => {
-  let placeForEventObject = false; 
+  onShowFormOnEditing }) => {
+  let placeForEventObject = false;
   return Array(24)
     .fill(null)
     .map((elem, indexElem) => {
       elem = indexElem;
       return elem;
     })
-    .map((hourPeriod, index) =>
-      <div 
+    .map((hourPeriod, index) => {
+      const currentDate = new Date();
+      const currentDay = arrDaysOfWeek.find(day => day.getDate() === currentDate.getDate());
+      return <div
         key={hourPeriod}
         className="main__sidebar_days_hours"
         data-hour-number={index}
       >
         {
-          arrayForRender.map(objectElem => { 
+          arrayForRender.map(objectElem => {
             arrDaysOfWeek.forEach(day => {
-              if(objectElem.startDate.getDay() === dayNumber
-                && objectElem.startDate.getDate() === day.getDate()
-                && objectElem.startDate.getMonth() === day.getMonth()
-                && objectElem.startDate.getFullYear() === day.getFullYear()
-                && objectElem.startDate.getHours() === index){
-                  placeForEventObject = true;
+              if (objectElem.startDate.getDay() === dayNumber
+                && moment(objectElem.startDate).format('l') === moment(day).format('l')
+                && objectElem.startDate.getHours() === index) {
+                placeForEventObject = true;
               }
             });
-            if(placeForEventObject){
+            if (placeForEventObject) {
               placeForEventObject = false;
-              return <EventObject 
-                key={objectElem.id} 
+              return <EventObject
+                key={objectElem.id}
                 objectElem={objectElem}
-                onShowFormOnEditing={onShowFormOnEditing} 
+                onShowFormOnEditing={onShowFormOnEditing}
               />;
             }
-            return null;  
+            return null;
           })
-          
         }
-        {/* {
-          arrDaysOfWeek.map(dayLineEelem => {
-            const currentDate = new Date();
-            if(dayLineEelem.getDate() === currentDate.getDate()) console.log('sdfs');
-          })
-        } */}
-      </div>);
+        {
+          currentDate.getDay() === dayNumber
+            && currentDate.getHours() === index
+            && currentDay
+            && <RedLine key={Math.random()} />
+        }
+      </div>
+    });
 };
 export default DaysSidebar;
