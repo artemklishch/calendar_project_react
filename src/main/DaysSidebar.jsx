@@ -1,8 +1,13 @@
 import React from 'react';
 import EventObject from './EventObject';
+import RedLine from '../redLine/RedLine';
 
 
-const DaysSidebar = ({arrDaysOfWeek, dayNumber, arrayForRender, onShowFormOnEditing}) => {
+const DaysSidebar = ({
+  arrDaysOfWeek,
+  dayNumber,
+  arrayForRender,
+  onShowFormOnEditing}) => {
   let placeForEventObject = false; 
   return Array(24)
     .fill(null)
@@ -37,7 +42,14 @@ const DaysSidebar = ({arrDaysOfWeek, dayNumber, arrayForRender, onShowFormOnEdit
             }
             return null;  
           })
+          
         }
+        {/* {
+          arrDaysOfWeek.map(dayLineEelem => {
+            const currentDate = new Date();
+            if(dayLineEelem.getDate() === currentDate.getDate()) console.log('sdfs');
+          })
+        } */}
       </div>);
 };
 export default DaysSidebar;
