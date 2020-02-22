@@ -10,7 +10,6 @@ import {
 import ModalWindow from './modalWindow/ModalWindow';
 import { forObjCreateBtn } from './funcs/forObjOnCreateBtn';
 import { forObjectOnClickOnField } from './funcs/forObjectOnClickOnField';
-import { array } from './storage';
 import { forChangingEventsArray } from './funcs/funcForRenderEvents';
 import { onChangeArrayOfEvents, onChangeArrayOfEventsInDelete } from './funcs/onChangeArrayOfEvents';
 import { forObjectOnClickOnEvent } from './funcs/forObjectOnClickOnEvent';
@@ -22,7 +21,7 @@ class App extends PureComponent {
   state = {
     firstDayOfWeek: firstDayForCurrentOfWeek(),
     isOpen: false,
-    arrayOfEvents: array,
+    arrayOfEvents: [],
     isEditing: false,
     positionOfRedLine: getPosOfRedLine(),
     validateText: '',
