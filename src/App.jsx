@@ -37,11 +37,15 @@ class App extends PureComponent {
   }
   componentWillUnmount() {
     clearInterval(this.interval);
-    // this.onRenderAfterGetData();
+    this.onRenderAfterGetData();
+  }
+  componentDidUpdate(){
+    this.onRenderAfterGetData();
   }
 
   onRenderAfterGetData = () => {
-    this.setState({ arrayOfEvents: fetchForGetData() });
+    fetchForGetData()
+      .then(array => this.setState({ arrayOfEvents: array }))
   };
   onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
   onArrowBtns = event => this.setState({ firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek) });
@@ -66,8 +70,7 @@ class App extends PureComponent {
     if (this.state.validateText !== '') return;
     const tempObj = onFormObject(event);
     onCreateEventAfterSubmit(tempObj);
-    
-      console.log(this.onRenderAfterGetData());
+     this.onRenderAfterGetData();
     this.hideForm();
   }
   onDeleteEvent = () => {

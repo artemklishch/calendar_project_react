@@ -1,7 +1,7 @@
-const baseUrl = 'https://crudcrud.com/api/0671888a0f4047cca1d765647c97f7d9/eventsArray';
+const baseUrl = 'https://crudcrud.com/api/1bc818045ed14f658d83c243f94b44ee/eventsArray';
 
 export const onCreateEventAfterSubmit = object => {
-  fetch(baseUrl, {
+  return fetch(baseUrl, {
     method: "POST",
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -14,7 +14,7 @@ export const onCreateEventAfterSubmit = object => {
 };
 
 export const fetchForGetData = () => {
-  fetch(baseUrl)
+  return fetch(baseUrl)
     .then(response => response.json())
     .then(array => array.map(({_id, ...obj}) => ({...obj, id: _id})));
 };
