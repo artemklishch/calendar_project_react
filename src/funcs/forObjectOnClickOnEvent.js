@@ -12,12 +12,14 @@ export const forObjectOnClickOnEvent = (event, arrayOfEvents) => {
   endHour = endHour > 9 ? endHour : `0${endHour}`;
   let endMinutes = new Date(currenEvent.endDate).getMinutes();
   endMinutes = endMinutes > 9 ? endMinutes : `0${endMinutes}`;
-
+  const startGMTDate = new Date(Date.UTC(currenEvent.startDate.getFullYear(), currenEvent.startDate.getMonth(), currenEvent.startDate.getDate()));
+  const endGMTDate = new Date(Date.UTC(currenEvent.endDate.getFullYear(), currenEvent.endDate.getMonth(), currenEvent.endDate.getDate()));
+  
   return {
     startTime: `${startHour}:${startMinutes}`,
     endTime: `${endHour}:${endMinutes}`,
-    startDate: currenEvent.startDate.toISOString().substr(0, 10),
-    endDate: currenEvent.endDate.toISOString().substr(0, 10),
+    startDate: startGMTDate.toISOString().substr(0, 10),
+    endDate: endGMTDate.toISOString().substr(0, 10),
     header: currenEvent.header,
     description: currenEvent.description,
     id: currenEvent.id,

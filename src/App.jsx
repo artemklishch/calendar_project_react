@@ -11,11 +11,10 @@ import ModalWindow from './modalWindow/ModalWindow';
 import { forObjCreateBtn } from './funcs/forObjOnCreateBtn';
 import { forObjectOnClickOnField } from './funcs/forObjectOnClickOnField';
 import { forChangingEventsArray } from './funcs/funcForRenderEvents';
-import { onChangeArrayOfEvents, onChangeArrayOfEventsInDelete } from './funcs/onChangeArrayOfEvents';
 import { forObjectOnClickOnEvent } from './funcs/forObjectOnClickOnEvent';
 import { getPosOfRedLine } from './funcs/onPositionOfRedLine';
 import { onInputValidate, onClickValidate, onCheckLateEffortOfDeleteOrEdite } from './funcs/validate';
-import { onCreateEventAfterSubmit, fetchForGetData } from './funcs/eventsGateway';
+import { onCreateEventAfterSubmit, onChangeEventAfterSubmit, onDeleteEventInArray, fetchForGetData } from './funcs/eventsGateway';
 import { onFormObject } from './funcs/onFormObject';
 
 
@@ -34,18 +33,16 @@ class App extends PureComponent {
         positionOfRedLine: getPosOfRedLine(),
       });
     }, 1000);
+    this.onRenderAfterGetData();
   }
   componentWillUnmount() {
     clearInterval(this.interval);
-    this.onRenderAfterGetData();
-  }
-  componentDidUpdate(){
-    this.onRenderAfterGetData();
   }
 
   onRenderAfterGetData = () => {
     fetchForGetData()
       .then(array => this.setState({ arrayOfEvents: array }))
+      .catch(() => alert('Internal Server Error. Can`t display events'));
   };
   onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
   onArrowBtns = event => this.setState({ firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek) });
@@ -68,21 +65,33 @@ class App extends PureComponent {
   onFormSubmit = event => {
     event.preventDefault();
     if (this.state.validateText !== '') return;
-    const tempObj = onFormObject(event);
-    onCreateEventAfterSubmit(tempObj);
-     this.onRenderAfterGetData();
+    if (this.state.isEditing !== false) {
+     const object = onFormObject(event);
+     object.id = this.tempObj.id;
+      onChangeEventAfterSubmit(object, this.tempObj.id)
+        .then(() => this.onRenderAfterGetData())
+        .catch(error => alert(error.message));
+    } else {
+      const object = onFormObject(event);
+      onCreateEventAfterSubmit(object)
+        .then(() => this.onRenderAfterGetData())
+        .catch(error => alert(error.message));
+    }
     this.hideForm();
   }
-  onDeleteEvent = () => {
+  onDeleteEvent = event => {
     if (this.state.validateText === 'You can`t change or delete event after 15 minutes to event') return;
-    this.setState({ arrayOfEvents: onChangeArrayOfEventsInDelete(this.state.arrayOfEvents, this.state.isEditing) });
+    const object = onFormObject(event);
+     object.id = this.tempObj.id;
+     onDeleteEventInArray(this.tempObj.id)
+        .then(() => this.onRenderAfterGetData())
+        .catch(error => alert(error.message));
     this.hideForm();
   };
   onValidate = event =>
     this.setState({ validateText: onInputValidate(event, this.state.isEditing, this.state.arrayOfEvents) });
 
   render() {
-    // console.log(this.state.arrayOfEvents);
     const arrayForRender = forChangingEventsArray(this.state.arrayOfEvents);
     const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
     const dateTitle = onRenderTitleDate(arrDaysOfWeek);
