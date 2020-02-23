@@ -16,5 +16,5 @@ export const onCreateEventAfterSubmit = object => {
 export const fetchForGetData = () => {
   fetch(baseUrl)
     .then(response => response.json())
-    .then(array => array.reduce(({_id, ...obj}) => (obj.id = _id, ...obj), []));
+    .then(array => array.map(({_id, ...obj}) => ({...obj, id: _id})));
 };

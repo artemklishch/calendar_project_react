@@ -14,8 +14,6 @@ export const onFormObject = event => {
   tempObj.endTimePlace = tempObj.endTimePlace.split(':');
   tempObj.endDate = tempObj.endDate.concat(tempObj.endTimePlace);
   tempObj.endDate = new Date(...tempObj.endDate);
-
-  tempObj.id = Math.random().toFixed(10);
   
   tempObj.header = tempObj.header === '' ? 'No header' : tempObj.header;
   tempObj.description = tempObj.description === '' ? '' : tempObj.description;
