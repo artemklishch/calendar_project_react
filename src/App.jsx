@@ -15,6 +15,8 @@ import { onChangeArrayOfEvents, onChangeArrayOfEventsInDelete } from './funcs/on
 import { forObjectOnClickOnEvent } from './funcs/forObjectOnClickOnEvent';
 import { getPosOfRedLine } from './funcs/onPositionOfRedLine';
 import { onInputValidate, onClickValidate, onCheckLateEffortOfDeleteOrEdite } from './funcs/validate';
+import { onCreateEventAfterSubmit, fetchForGetData } from './funcs/eventsGateway';
+import { onFormObject } from './funcs/onFormObject';
 
 
 class App extends PureComponent {
@@ -58,7 +60,10 @@ class App extends PureComponent {
   onFormSubmit = event => {
     event.preventDefault();
     if (this.state.validateText !== '') return;
-    this.setState({ arrayOfEvents: onChangeArrayOfEvents(this.state.arrayOfEvents, event, this.state.isEditing) });
+    const tempObj = onFormObject(event);
+    onCreateEventAfterSubmit(tempObj);
+    fetchForGetData();
+    //this.setState({ arrayOfEvents: onChangeArrayOfEvents(this.state.arrayOfEvents, event, this.state.isEditing) });
     this.hideForm();
   }
   onDeleteEvent = () => {
@@ -70,6 +75,7 @@ class App extends PureComponent {
     this.setState({ validateText: onInputValidate(event, this.state.isEditing, this.state.arrayOfEvents) });
 
   render() {
+    // console.log(this.state.arrayOfEvents);
     const arrayForRender = forChangingEventsArray(this.state.arrayOfEvents);
     const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
     const dateTitle = onRenderTitleDate(arrDaysOfWeek);
