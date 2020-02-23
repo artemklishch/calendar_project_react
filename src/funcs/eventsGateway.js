@@ -1,4 +1,4 @@
-const baseUrl = 'https://crudcrud.com/api/1bc818045ed14f658d83c243f94b44ee/eventsArray';
+const baseUrl = 'https://crudcrud.com/api/60bfb24803d94f51a47eb0d3413c220/eventsArray';
 
 export const onCreateEventAfterSubmit = object => {
   return fetch(baseUrl, {
