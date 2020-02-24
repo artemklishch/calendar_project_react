@@ -1,14 +1,14 @@
 import React from 'react';
 import './popup.scss';
 import classNames from 'classnames';
-
+import PropTypes from 'prop-types';
 
 const ModalWindow = ({
   isOpen,
   onHideForm,
   tempObj,
   onCreateEvent,
-  backgroundColor = "#0851f6",
+  backgroundColor,
   isEditing,
   onDeleteEvent,
   onValidate,
@@ -46,3 +46,17 @@ const ModalWindow = ({
   );
 };
 export default ModalWindow;
+
+
+ModalWindow.propTypes = {
+  isOpen: PropTypes.bool,
+  onHideForm: PropTypes.func.isRequired,
+  onDeleteEvent: PropTypes.func.isRequired,
+  onValidate: PropTypes.func.isRequired,
+  validateText: PropTypes.string,
+  backgroundColor: PropTypes.string,
+}
+ModalWindow.defaultProps = {
+  validateText: '',
+  backgroundColor: '#0851f6',
+}
