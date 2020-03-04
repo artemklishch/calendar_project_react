@@ -10,7 +10,9 @@ const DaysSidebar = ({
   arrayForRender,
   onShowFormOnEditing,
   positionOfRedLine }) => {
+    
   let placeForEventObject = false;
+
   return Array(24)
     .fill(null)
     .map((elem, indexElem) => {

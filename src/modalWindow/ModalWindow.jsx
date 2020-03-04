@@ -13,9 +13,12 @@ const ModalWindow = ({
   onDeleteEvent,
   onValidate,
   validateText }) => {
+
   if (!isOpen) return null;
+
   const basketDeleteClass = classNames('event__btn-delete',
     { 'btn-delete_block': isEditing });
+    
   return (
     <div className="popup-layer">
       <form className="popup event" onSubmit={onCreateEvent} >

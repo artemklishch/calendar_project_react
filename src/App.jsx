@@ -44,28 +44,35 @@ class App extends PureComponent {
       .then(array => this.setState({ arrayOfEvents: array }))
       .catch(() => alert('Internal Server Error. Can`t display events'));
   };
+
   onTodayButton = () => this.setState({ firstDayOfWeek: firstDayForCurrentOfWeek() });
+
   onArrowBtns = event => this.setState({ firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek) });
+
   hideForm = () => this.setState({ isOpen: false, isEditing: false });
+
   showFormOnCreateButton = () => {
     this.tempObj = forObjCreateBtn();
     this.setState({ isOpen: true, validateText: onClickValidate({ ...this.tempObj }, this.state.arrayOfEvents) });
   }
+
   showFormOnClickOnField = event => {
     if (!event.target.classList.contains('main__sidebar_days_hours')) return;
     this.tempObj = forObjectOnClickOnField(event, generateArrayOfCurrentWeek(this.state.firstDayOfWeek));
     this.setState({ isOpen: true, validateText: onClickValidate({ ...this.tempObj }, this.state.arrayOfEvents) });
   }
+
   showFormOnEditing = event => {
     if (!event.target.classList.contains('eventObj')) return;
     this.tempObj = forObjectOnClickOnEvent(event, this.state.arrayOfEvents);
     this.setState({ isOpen: true, isEditing: this.tempObj.id });
     this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
   };
+
   onFormSubmit = event => {
     event.preventDefault();
     if (this.state.validateText !== '') return;
-    if (this.state.isEditing !== false) {
+    if (this.state.isEditing) {
      const object = onFormObject(event);
      object.id = this.tempObj.id;
       onChangeEventAfterSubmit(object, this.tempObj.id)
@@ -79,6 +86,7 @@ class App extends PureComponent {
     }
     this.hideForm();
   }
+
   onDeleteEvent = event => {
     if (this.state.validateText === 'You can`t change or delete event after 15 minutes to event') return;
     const object = onFormObject(event);
@@ -88,6 +96,7 @@ class App extends PureComponent {
         .catch(error => alert(error.message));
     this.hideForm();
   };
+
   onValidate = event =>
     this.setState({ validateText: onInputValidate(event, this.state.isEditing, this.state.arrayOfEvents) });
 

@@ -9,6 +9,7 @@ const TimeSidebar = () => {
       } 
       return elem;
     });
+    
   return (
     arrOfTimePoints.map(timePoint =>
       <div key={Math.random().toFixed(5)} className="main__sidebar_timing_place">
