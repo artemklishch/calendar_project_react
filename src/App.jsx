@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import MainElems from './main/MainElems';
+import MainBars from './main/MainBars';
 import HeaderElems from './header/HeaderElems';
 import {
   onRenderTitleDate,
@@ -27,6 +27,7 @@ class App extends PureComponent {
     positionOfRedLine: getPosOfRedLine(),
     validateText: '',
   };
+
   componentDidMount() {
     this.interval = setInterval(() => {
       this.setState({
@@ -35,9 +36,7 @@ class App extends PureComponent {
     }, 1000);
     this.onRenderAfterGetData();
   }
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  componentWillUnmount() { clearInterval(this.interval); }
 
   onRenderAfterGetData = () => {
     fetchForGetData()
@@ -57,13 +56,12 @@ class App extends PureComponent {
   }
 
   showFormOnClickOnField = event => {
-    if (!event.target.classList.contains('main__sidebar_days_hours')) return;
+    if (forObjectOnClickOnField(event, generateArrayOfCurrentWeek(this.state.firstDayOfWeek)) === null) return;
     this.tempObj = forObjectOnClickOnField(event, generateArrayOfCurrentWeek(this.state.firstDayOfWeek));
     this.setState({ isOpen: true, validateText: onClickValidate({ ...this.tempObj }, this.state.arrayOfEvents) });
   }
 
   showFormOnEditing = event => {
-    if (!event.target.classList.contains('eventObj')) return;
     this.tempObj = forObjectOnClickOnEvent(event, this.state.arrayOfEvents);
     this.setState({ isOpen: true, isEditing: this.tempObj.id });
     this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
@@ -73,8 +71,8 @@ class App extends PureComponent {
     event.preventDefault();
     if (this.state.validateText !== '') return;
     if (this.state.isEditing) {
-     const object = onFormObject(event);
-     object.id = this.tempObj.id;
+      const object = onFormObject(event);
+      object.id = this.tempObj.id;
       onChangeEventAfterSubmit(object, this.tempObj.id)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
@@ -87,13 +85,12 @@ class App extends PureComponent {
     this.hideForm();
   }
 
-  onDeleteEvent = event => {
-    if (this.state.validateText === 'You can`t change or delete event after 15 minutes to event') return;
-    const object = onFormObject(event);
-     object.id = this.tempObj.id;
-     onDeleteEventInArray(this.tempObj.id)
-        .then(() => this.onRenderAfterGetData())
-        .catch(error => alert(error.message));
+  onDeleteEvent = () => {
+    const unacceptableEffortToDelete = 'You can`t change or delete event after 15 minutes to event';
+    if (this.state.validateText === unacceptableEffortToDelete) return;
+    onDeleteEventInArray(this.tempObj.id)
+      .then(() => this.onRenderAfterGetData())
+      .catch(error => alert(error.message));
     this.hideForm();
   };
 
@@ -101,7 +98,7 @@ class App extends PureComponent {
     this.setState({ validateText: onInputValidate(event, this.state.isEditing, this.state.arrayOfEvents) });
 
   render() {
-    const arrayForRender = forChangingEventsArray(this.state.arrayOfEvents);
+    const arrayOfEventsForRender = forChangingEventsArray(this.state.arrayOfEvents);
     const arrDaysOfWeek = generateArrayOfCurrentWeek(this.state.firstDayOfWeek);
     const dateTitle = onRenderTitleDate(arrDaysOfWeek);
     return (
@@ -113,10 +110,10 @@ class App extends PureComponent {
           onClickTodayWeek={this.onTodayButton}
           onShowForm={this.showFormOnCreateButton}
         />
-        <MainElems
+        <MainBars
           arrDaysOfWeek={arrDaysOfWeek}
           onShowForm={this.showFormOnClickOnField}
-          arrayForRender={arrayForRender}
+          arrayOfEventsForRender={arrayOfEventsForRender}
           onShowFormOnEditing={this.showFormOnEditing}
           positionOfRedLine={this.state.positionOfRedLine}
         />

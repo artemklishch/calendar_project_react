@@ -7,7 +7,7 @@ import moment from 'moment';
 const DaysSidebar = ({
   arrDaysOfWeek,
   dayNumber,
-  arrayForRender,
+  arrayOfEventsForRender,
   onShowFormOnEditing,
   positionOfRedLine }) => {
     
@@ -28,7 +28,7 @@ const DaysSidebar = ({
         data-hour-number={index}
       >
         {
-          arrayForRender.map(objectElem => {
+          arrayOfEventsForRender.map(objectElem => {
             arrDaysOfWeek.forEach(day => {
               if (objectElem.startDate.getDay() === dayNumber
                 && moment(objectElem.startDate).format('l') === moment(day).format('l')
