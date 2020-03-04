@@ -1,4 +1,5 @@
 export const forObjectOnClickOnField = (event, arrDaysOfWeek) => {
+  if (!event.target.classList.contains('main__sidebar_days_hours')) return null;
   const hourNumber = +event.target.dataset.hourNumber;
   const dayNumber = +event.target.closest('.main__sidebar_days_line').dataset.dayNumber;
   const currentYear = arrDaysOfWeek[dayNumber].getFullYear();

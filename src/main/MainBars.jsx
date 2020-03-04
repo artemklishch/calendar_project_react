@@ -3,10 +3,10 @@ import TimeSidebar from './TimeSidebar';
 import DaysSidebar from './DaysSidebar';
 import './main.scss';
 
-const MainElems = ({
+const MainBars = ({
   arrDaysOfWeek,
   onShowForm,
-  arrayForRender,
+  arrayOfEventsForRender,
   onShowFormOnEditing,
   positionOfRedLine, }) => {
   const arrayOfDays = Array(7).fill(null);
@@ -23,7 +23,7 @@ const MainElems = ({
               <DaysSidebar
                 arrDaysOfWeek={arrDaysOfWeek}
                 dayNumber={index}
-                arrayForRender={arrayForRender}
+                arrayOfEventsForRender={arrayOfEventsForRender}
                 onShowFormOnEditing={onShowFormOnEditing}
                 positionOfRedLine={positionOfRedLine}
               />
@@ -34,4 +34,4 @@ const MainElems = ({
     </main>
   );
 };
-export default MainElems;
+export default MainBars;
