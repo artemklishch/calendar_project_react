@@ -68,7 +68,7 @@ class App extends PureComponent {
     this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
     const unacceptableEffortToDelete = 'You can`t change or delete event after 15 minutes to event';
     if (onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }) === unacceptableEffortToDelete){
-      this.setState({onLateEditing: true});};
+      this.setState({onLateEditing: true});}; 
   };
 
   onFormSubmit = event => {
