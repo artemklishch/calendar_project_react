@@ -24,7 +24,7 @@ class App extends PureComponent {
     isOpen: false,
     arrayOfEvents: [],
     isEditing: false,
-    positionOfRedLine: getPosOfRedLine(),
+    positionOfRedLine: getPosOfRedLine(), 
     validateText: '',
     onLateEditing: false,
   };
