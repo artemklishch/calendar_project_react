@@ -44,6 +44,7 @@ const transformObjectFunc = (element) => {
       endDate: endTimeForObj1,
       description:element.description,
       id: element.id,
+      _id: element._id,
   };
   const obj2 = {
       backgroundColor:element.backgroundColor,
@@ -52,6 +53,7 @@ const transformObjectFunc = (element) => {
       endDate: element.endDate,
       description:element.description,
       id: element.id,
+      _id: element._id,
   };
   return [obj1, obj2];  
 };

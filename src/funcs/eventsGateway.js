@@ -1,9 +1,9 @@
-const baseUrl = 'https://crudcrud.com/api/73b38a8c21ab4fbf85b898b06a850bc0/eventsArray';
+const baseUrl = 'https://5e517090f2c0d300147c07c9.mockapi.io/api/v1/eventsArray';
 
 export const fetchForGetData = () => {
   return fetch(baseUrl)
-    .then(response => response.json())
-    .then(array => array.map(({_id, ...obj}) => ({...obj, id: _id})));
+    .then(response => response.json());
+    // .then(array => array.map(({_id, ...obj}) => ({...obj, id: _id})));
 };
 
 export const onCreateEventAfterSubmit = object => {

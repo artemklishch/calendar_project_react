@@ -1,7 +1,8 @@
 export const forObjectOnClickOnEvent = (event, arrayOfEvents) => {
   const id = event.target.dataset.eventId;
-  const currenEvent = arrayOfEvents.find(event => event.id === id);
-  
+ 
+  const currenEvent = arrayOfEvents.find(event => event._id === id);
+
   let startHour = new Date(currenEvent.startDate).getHours();
   startHour = startHour > 9 ? startHour : `0${startHour}`;
   let startMinutes = new Date(currenEvent.startDate).getMinutes();
@@ -22,6 +23,7 @@ export const forObjectOnClickOnEvent = (event, arrayOfEvents) => {
     endDate: endGMTDate.toISOString().substr(0, 10),
     header: currenEvent.header,
     description: currenEvent.description,
-    id: currenEvent.id,
+    _id: currenEvent._id,
+    id: currenEvent.id
   };
 };  

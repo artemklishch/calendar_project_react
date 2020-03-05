@@ -11,11 +11,11 @@ const EventObject = ({ objectElem, onShowFormOnEditing }) => {
         height: height,
         padding: padding,
         backgroundColor: objectElem.backgroundColor }} 
-      data-event-id={objectElem.id}
+      data-event-id={objectElem._id}
       onClick={onShowFormOnEditing}
     >
-      <h4 className="eventObj" data-event-id={objectElem.id}>{objectElem.header}</h4>
-      <p className="eventObj" data-event-id={objectElem.id}>{timeString}</p>
+      <h4 className="eventObj" data-event-id={objectElem._id}>{objectElem.header}</h4>
+      <p className="eventObj" data-event-id={objectElem._id}>{timeString}</p>
     </div>
   );
 };

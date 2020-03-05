@@ -26,6 +26,7 @@ class App extends PureComponent {
     isEditing: false,
     positionOfRedLine: getPosOfRedLine(),
     validateText: '',
+    onLateEditing: false,
   };
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class App extends PureComponent {
 
   onArrowBtns = event => this.setState({ firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek) });
 
-  hideForm = () => this.setState({ isOpen: false, isEditing: false });
+  hideForm = () => this.setState({ isOpen: false, isEditing: false, onLateEditing:false });
 
   showFormOnCreateButton = () => {
     this.tempObj = forObjCreateBtn();
@@ -63,8 +64,12 @@ class App extends PureComponent {
 
   showFormOnEditing = event => {
     this.tempObj = forObjectOnClickOnEvent(event, this.state.arrayOfEvents);
-    this.setState({ isOpen: true, isEditing: this.tempObj.id });
+    this.setState({ isOpen: true, isEditing: this.tempObj._id });
     this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
+    const unacceptableEffortToDelete = 'You can`t change or delete event after 15 minutes to event';
+    if (this.state.validateText === unacceptableEffortToDelete){
+      this.setState({onLateEditing: true});
+    }
   };
 
   onFormSubmit = event => {
@@ -72,7 +77,7 @@ class App extends PureComponent {
     if (this.state.validateText !== '') return;
     if (this.state.isEditing) {
       const object = onFormObject(event);
-      object.id = this.tempObj.id;
+      object._id = this.tempObj._id;
       onChangeEventAfterSubmit(object, this.tempObj.id)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
@@ -126,6 +131,7 @@ class App extends PureComponent {
           onDeleteEvent={this.onDeleteEvent}
           onValidate={this.onValidate}
           validateText={this.state.validateText}
+          onLateEditing={this.state.onLateEditing}
         />
       </>
     )
