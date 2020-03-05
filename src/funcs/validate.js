@@ -19,7 +19,7 @@ const onCheckIntersectionEvents = (object, events) => {
     let currentStartTime = object.startDate.getTime();
     let currentEndTime = object.endDate.getTime();
     for(let i = 0; i < eventsArray.length; i++) {
-        if(eventsArray[i].id === object.id) continue;
+        if(eventsArray[i]._id === object._id) continue;
         let elemStartTime = eventsArray[i].startDate.getTime();
         let elemEndTime = eventsArray[i].endDate.getTime();
         if((currentStartTime < elemEndTime 
@@ -74,7 +74,7 @@ export const onMakeObjectFromValuesInForm = isEditing => {
     tempObj.endDate.push(endDate_hours, endDate_min);
     tempObj.endDate = new Date(...tempObj.endDate);
 
-    tempObj.id = isEditing || '';    
+    tempObj._id = isEditing || '';    
 
     return tempObj;
 };

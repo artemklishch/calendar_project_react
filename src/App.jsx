@@ -63,7 +63,7 @@ class App extends PureComponent {
 
   showFormOnEditing = event => {
     this.tempObj = forObjectOnClickOnEvent(event, this.state.arrayOfEvents);
-    this.setState({ isOpen: true, isEditing: this.tempObj.id });
+    this.setState({ isOpen: true, isEditing: this.tempObj._id });
     this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
   };
 
@@ -72,12 +72,12 @@ class App extends PureComponent {
     if (this.state.validateText !== '') return;
     if (this.state.isEditing) {
       const object = onFormObject(event);
-      onChangeEventAfterSubmit(object, this.tempObj.id)
+      object._id = this.tempObj._id;
+      onChangeEventAfterSubmit(object, this.tempObj._id)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
     } else {
       const object = onFormObject(event);
-      object.id = Math.round(Math.random() * 1000000);
       onCreateEventAfterSubmit(object)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
@@ -88,7 +88,7 @@ class App extends PureComponent {
   onDeleteEvent = () => {
     const unacceptableEffortToDelete = 'You can`t change or delete event after 15 minutes to event';
     if (this.state.validateText === unacceptableEffortToDelete) return;
-    onDeleteEventInArray(this.tempObj.id)
+    onDeleteEventInArray(this.tempObj._id)
       .then(() => this.onRenderAfterGetData())
       .catch(error => alert(error.message));
     this.hideForm();
