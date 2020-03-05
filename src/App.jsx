@@ -49,7 +49,7 @@ class App extends PureComponent {
 
   onArrowBtns = event => this.setState({ firstDayOfWeek: onGenerateAnotherfirstDayOfWeek(event, this.state.firstDayOfWeek) });
 
-  hideForm = () => this.setState({ isOpen: false, isEditing: false, onLateEditing:false });
+  hideForm = () => this.setState({ isOpen: false, isEditing: false, onLateEditing:false, validateText: '' });
 
   showFormOnCreateButton = () => {
     this.tempObj = forObjCreateBtn();
@@ -67,9 +67,8 @@ class App extends PureComponent {
     this.setState({ isOpen: true, isEditing: this.tempObj._id });
     this.setState({ validateText: onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }), });
     const unacceptableEffortToDelete = 'You can`t change or delete event after 15 minutes to event';
-    if (this.state.validateText === unacceptableEffortToDelete){
-      this.setState({onLateEditing: true});
-    }
+    if (onCheckLateEffortOfDeleteOrEdite({ ...this.tempObj }) === unacceptableEffortToDelete){
+      this.setState({onLateEditing: true});};
   };
 
   onFormSubmit = event => {
