@@ -72,12 +72,12 @@ class App extends PureComponent {
     if (this.state.validateText !== '') return;
     if (this.state.isEditing) {
       const object = onFormObject(event);
-      object.id = this.tempObj.id;
       onChangeEventAfterSubmit(object, this.tempObj.id)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
     } else {
       const object = onFormObject(event);
+      object.id = Math.round(Math.random() * 1000000);
       onCreateEventAfterSubmit(object)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
