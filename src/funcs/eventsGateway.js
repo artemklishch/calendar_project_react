@@ -2,7 +2,7 @@ const baseUrl = 'https://5e517090f2c0d300147c07c9.mockapi.io/api/v1/eventsArray'
 
 export const fetchForGetData = () => {
   return fetch(baseUrl)
-    .then(response => response.json());
+    .then(response => response.json()); 
     // .then(array => array.map(({_id, ...obj}) => ({...obj, id: _id})));
 };
 
