@@ -3,7 +3,6 @@ export const forObjectOnClickOnEvent = (event, arrayOfEvents) => {
  
   const currenEvent = arrayOfEvents.find(event => event._id === id);
 
-  
   let startHour = new Date(currenEvent.startDate).getHours();
   startHour = startHour > 9 ? startHour : `0${startHour}`;
   let startMinutes = new Date(currenEvent.startDate).getMinutes();
@@ -25,5 +24,6 @@ export const forObjectOnClickOnEvent = (event, arrayOfEvents) => {
     header: currenEvent.header,
     description: currenEvent.description,
     _id: currenEvent._id,
+    id: currenEvent.id
   };
 };  
