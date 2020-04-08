@@ -15,11 +15,8 @@ const DaysSidebar = ({
 
   return Array(24)
     .fill(null)
-    .map((elem, indexElem) => {
-      elem = indexElem;
-      return elem;
-    })
     .map((hourPeriod, index) => {
+      hourPeriod = index;
       const currentDate = new Date();
       const currentDay = arrDaysOfWeek.find(day => day.getDate() === currentDate.getDate());
       return <div
