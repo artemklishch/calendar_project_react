@@ -51,7 +51,7 @@ const DaysSidebar = ({
           currentDate.getDay() === dayNumber
             && currentDate.getHours() === index
             && currentDay
-            && <RedLine key={Math.random()} positionOfRedLine={positionOfRedLine} />
+            && <RedLine positionOfRedLine={positionOfRedLine} />
         }
       </div>
     });
