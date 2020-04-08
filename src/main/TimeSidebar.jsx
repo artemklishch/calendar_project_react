@@ -11,8 +11,8 @@ const TimeSidebar = () => {
     });
     
   return (
-    arrOfTimePoints.map(timePoint =>
-      <div key={Math.random().toFixed(5)} className="main__sidebar_timing_place">
+    arrOfTimePoints.map((timePoint,index) =>
+      <div key={index} className="main__sidebar_timing_place">
         <span className="main__sidebar_time">{timePoint}</span>
         <div className="main__sidebar_timing_place-bord"></div>
       </div>)
