@@ -6,15 +6,7 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 import toJson from 'enzyme-to-json';
-import { fetchForGetData, onCreateEventAfterSubmit, onDeleteEventInArray } from '../funcs/eventsGateway';
 
-jest.mock('../funcs/eventsGateway', () => {
-  return {
-    fetchForGetData: jest.fn(() => Promise.resolve([])),
-    onCreateEventAfterSubmit: jest.fn(() => Promise.resolve()),
-    onDeleteEventInArray: jest.fn(() => Promise.resolve()),
-  }
-});
 
 describe('ModalWindow', () => {
   it('should display ModalWindow', () => {
@@ -55,8 +47,7 @@ describe('ModalWindow', () => {
     };
     const wrappedComponent = shallow(<ModalWindow {...props} />);
     wrappedComponent.find('.popup').simulate('submit');
-    // expect(props.onCreateEvent).toBeCalled();
-    expect(onCreateEventAfterSubmit).toBeCalled();
+    expect(props.onCreateEvent).toBeCalled();
   })
 
   it('should call function on close', () => {
