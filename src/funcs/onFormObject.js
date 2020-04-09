@@ -1,5 +1,4 @@
-export const onFormObject = event => {
-  event.preventDefault();
+export const onFormObject = () => {
   const form = document.querySelector('.popup');
   let tempObj = [...new FormData(form)]
       .reduce((acc, [field,value]) => ({...acc,[field]:value}),{});

@@ -37,10 +37,17 @@ describe('App', () => {
     expect(fetchForGetData).toBeCalled();
   })
 
-  it ('should post data to server', () => {
+  // it ('should post data to server', () => {
+  //   const wrappedComponent = shallow(<App />);
+  //   const onSubmitHandler = wrappedComponent.find('ModalWindow').prop('onCreateEvent');
+  //   onSubmitHandler();
+  //   expect(onCreateEventAfterSubmit).toBeCalled();
+  // })
+
+  it ('should delete data from server', () => {
     const wrappedComponent = shallow(<App />);
-    const onSubmitHandler = wrappedComponent.find('ModalWindow').prop('onCreateEvent');
-    onSubmitHandler();
-    expect(onCreateEventAfterSubmit).toBeCalled();
+    const onDeleteHandler = wrappedComponent.find('ModalWindow').prop('onDeleteEvent');
+    onDeleteHandler('some-id-1');
+    expect(onDeleteEventInArray).toBeCalled();
   })
 });

@@ -84,4 +84,5 @@ describe('ModalWindow', () => {
     wrappedComponent.find('#delete-img').simulate('click');
     expect(props.onDeleteEvent).toBeCalled();
   })
+
 });
