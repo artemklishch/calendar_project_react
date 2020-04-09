@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventObject should display event 1`] = `
+<div
+  className="main__sidebar_day_object eventObj"
+  data-event-id="some-id-1"
+  onClick={[MockFunction]}
+  style={
+    Object {
+      "backgroundColor": "red",
+      "height": "70560%",
+      "padding": undefined,
+      "top": undefined,
+    }
+  }
+>
+  <h4
+    className="eventObj"
+    data-event-id="some-id-1"
+  >
+    Hello world
+  </h4>
+  <p
+    className="eventObj"
+    data-event-id="some-id-1"
+  >
+    00:00 - 00:00
+  </p>
+</div>
+`;
