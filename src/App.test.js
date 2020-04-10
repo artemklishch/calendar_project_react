@@ -44,10 +44,10 @@ describe('App', () => {
   //   expect(onCreateEventAfterSubmit).toBeCalled();
   // })
 
-  it ('should delete data from server', () => {
-    const wrappedComponent = shallow(<App />);
-    const onDeleteHandler = wrappedComponent.find('ModalWindow').prop('onDeleteEvent');
-    onDeleteHandler('some-id-1');
-    expect(onDeleteEventInArray).toBeCalled();
-  })
+  // it ('should delete data from server', () => {
+  //   const wrappedComponent = shallow(<App />);
+  //   const onDeleteHandler = wrappedComponent.find('ModalWindow').prop('onDeleteEvent');
+  //   onDeleteHandler('some-id-1');
+  //   expect(onDeleteEventInArray).toBeCalled();
+  // })
 });
