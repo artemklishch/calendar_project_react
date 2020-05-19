@@ -1,4 +1,6 @@
-const baseUrl = 'https://5e517090f2c0d300147c07c9.mockapi.io/api/v1/eventsArray';
+// const baseUrl = 'https://5e517090f2c0d300147c07c9.mockapi.io/api/v1/eventsArray';
+
+const baseUrl = 'https://5e517090f2c0d300147c07c9.mockapi.io/api/v1/arrayOfEvents' 
 
 export const fetchForGetData = () => {
   return fetch(baseUrl)
