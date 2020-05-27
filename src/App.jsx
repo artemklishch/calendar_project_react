@@ -71,17 +71,17 @@ class App extends PureComponent {
       this.setState({onLateEditing: true});}; 
   };
 
-  onFormSubmit = event => {
+  onFormSubmit = (event) => {
     event.preventDefault();
     if (this.state.validateText !== '') return;
     if (this.state.isEditing) {
-      const object = onFormObject(event);
+      const object = onFormObject();
       object._id = this.tempObj._id;
       onChangeEventAfterSubmit(object, this.tempObj.id)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));
     } else {
-      const object = onFormObject(event);
+      const object = onFormObject();
       onCreateEventAfterSubmit(object)
         .then(() => this.onRenderAfterGetData())
         .catch(error => alert(error.message));

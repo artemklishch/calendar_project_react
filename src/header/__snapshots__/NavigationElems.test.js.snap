@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavigationElems /> should display NavigationElems component 1`] = `
+<nav
+  className="nav"
+>
+  <button
+    className="nav__button"
+  >
+    <img
+      alt="Plus img"
+      className="plus"
+      src="https://img.icons8.com/color/48/000000/plus-math.png"
+    />
+    Create
+  </button>
+  <button
+    className="nav_day"
+  >
+    Today
+  </button>
+  <div
+    className="nav__arow"
+  >
+    <div
+      className="nav__arow_left"
+    />
+    <div
+      className="nav__arow_right"
+    />
+  </div>
+  <div
+    className="nav__dateMonEar"
+  >
+    <h2
+      className="nav__dateMonEar-today"
+    />
+  </div>
+</nav>
+`;

@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalWindow should display ModalWindow 1`] = `
+<div
+  className="popup-layer"
+>
+  <form
+    className="popup event"
+    onSubmit={[MockFunction]}
+  >
+    <span
+      className="popup__btn-close"
+      onClick={[MockFunction]}
+    >
+      <img
+        alt="close"
+        className="close"
+        src="https://img.icons8.com/color/48/000000/close-window.png"
+      />
+    </span>
+    <input
+      className="event__name"
+      defaultValue="My header"
+      disabled={false}
+      name="header"
+      placeholder="Add title "
+      type="text"
+    />
+    <div
+      className="popup__picker"
+      onInput={[MockFunction]}
+    >
+      <img
+        alt="clock"
+        className="clock"
+        src="https://img.icons8.com/pastel-glyph/64/000000/time.png"
+      />
+      <input
+        className="event__date-start input"
+        defaultValue="2020-01-01"
+        disabled={false}
+        name="startDate"
+        required={true}
+        type="date"
+      />
+      <input
+        className="startTime_place input"
+        defaultValue="10-00"
+        disabled={false}
+        name="startTimePlace"
+        type="time"
+      />
+      <span
+        className="line"
+      />
+      <input
+        className="endTime_place input"
+        defaultValue="12-00"
+        disabled={false}
+        name="endTimePlace"
+        type="time"
+      />
+      <input
+        className="event__date-end input"
+        defaultValue="2020-01-01"
+        disabled={false}
+        name="endDate"
+        required={true}
+        type="date"
+      />
+    </div>
+    <div
+      className="centerData"
+    >
+      <img
+        alt="mutiline"
+        className="multiline"
+        src="https://img.icons8.com/windows/32/000000/multiline-text.png"
+      />
+      <textarea
+        className="multiline__text"
+        defaultValue="text"
+        disabled={false}
+        name="description"
+        placeholder="add description"
+        type="text"
+      />
+      <input
+        className="pick_color"
+        defaultValue="red"
+        name="backgroundColor"
+        type="color"
+      />
+    </div>
+    <div
+      className="footer-popup"
+    >
+      <p
+        className="message_validation"
+      >
+        text 1
+      </p>
+      <div
+        className="buttons"
+      >
+        <img
+          alt="basket"
+          className="event__btn-delete"
+          id="delete-img"
+          onClick={[MockFunction]}
+          src="https://img.icons8.com/windows/32/000000/trash.png"
+        />
+        <button
+          className="event__btn-save btn_save"
+          type="submit"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;

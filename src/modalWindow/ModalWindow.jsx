@@ -41,7 +41,7 @@ const ModalWindow = ({
         <div className="footer-popup">
           <p className="message_validation">{validateText}</p>
           <div className="buttons">
-            <img className={basketDeleteClass} src="https://img.icons8.com/windows/32/000000/trash.png" alt="basket" onClick={onDeleteEvent} />
+            <img id='delete-img' className={basketDeleteClass} src="https://img.icons8.com/windows/32/000000/trash.png" alt="basket" onClick={onDeleteEvent} />
             <button type="submit" className="event__btn-save btn_save">Save</button>
           </div>
         </div>
